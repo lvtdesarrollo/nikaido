@@ -34,7 +34,8 @@ export default class TutorialsList extends Component {
       isRtl: false,
       isSearchable: true,
       divIngredientes: false,
-      divRecetas:false
+      divRecetas:false,
+      isClearable: true,
      
 
     };
@@ -101,27 +102,31 @@ export default class TutorialsList extends Component {
   }
 
   addIngredientes(e) {
-
-    if (e.value) {
-      let existe = false;
-      for(var i = 0; i < this.state.lista.length; i++) {
-        if (this.state.lista[i].value ==  e.value) {
-            existe = true;
+    if(e==null){
+      // isClearable
+    }else{
+      if (e.value) {
+        let existe = false;
+        for(var i = 0; i < this.state.lista.length; i++) {
+          if (this.state.lista[i].value ==  e.value) {
+              existe = true;
+          }
         }
+  
+        if(!existe){
+          this.state.lista.push({ value: e.value, label: e.label })
+        }
+  
+        this.state.divIngredientes = (this.state.lista.length>0)?true:false;
+        this.searchReceta();
+        this.setState({
+          lista: this.state.lista,
+          divIngredientes: this.state.divIngredientes
+        });
+      
       }
-
-      if(!existe){
-        this.state.lista.push({ value: e.value, label: e.label })
-      }
-
-      this.state.divIngredientes = (this.state.lista.length>0)?true:false;
-
-      this.setState({
-        lista: this.state.lista,
-        divIngredientes: this.state.divIngredientes
-      });
-    
     }
+
 
   }
 
@@ -137,12 +142,19 @@ export default class TutorialsList extends Component {
       }
       
 
+     
       this.state.divIngredientes = (this.state.lista.length>0)?true:false;
+      this.searchReceta();
+
+
 
       this.setState({
         lista: this.state.lista,
-        divIngredientes: this.state.divIngredientes
+        divIngredientes: this.state.divIngredientes,
+        
       });
+
+      
     
     }
    
@@ -151,6 +163,7 @@ export default class TutorialsList extends Component {
   borrarTodo() {
     this.setState({
       lista: [],
+      recetas:[]
       
     });
   }
@@ -169,19 +182,24 @@ export default class TutorialsList extends Component {
   }
 
   searchReceta() {
-    TutorialDataService.buscarRecetas(this.state.lista)
+    if(this.state.lista.length>0){
+      TutorialDataService.buscarRecetas(this.state.lista)
       .then(response => {
         
-        this.state.divRecetas = (response.data.length>0)?true:false;
+        this.state.recetas = (response.data.length>0)?response.data:[];
+        
 
         this.setState({
-          recetas: response.data,
-          divRecetas: this.state.divRecetas
+          recetas: this.state.recetas
         });
       })
       .catch(e => {
         console.log(e);
       });
+    }else{
+      this.state.recetas = [];
+    }
+   
   }
 
   redirectToTarget = (e) => {
@@ -273,11 +291,16 @@ toggleSearchable = () =>
                   "list-group-item " +
                   (index === currentIndex ? "active" : "")
                 }
-              
+                style={{borderTopWidth: 'thin'}}
                 key={index}
               >
-                {ingrediente.label}<button  onClick={() => this.eliminarIngrediente(ingrediente, index)}>X</button>
+                {ingrediente.label}
+               
+               <button className="btn btn-default close" type="button" onClick={() => this.eliminarIngrediente(ingrediente, index)}>
+               <span aria-hidden="true">&times;</span>
+            </button> 
               </li>
+             
             ))
             }
           </ul>
@@ -285,17 +308,10 @@ toggleSearchable = () =>
             </div> 
           : null }
        
-          { lista.length>0 ?
-          <button
-            className="m-3 btn btn-sm btn-info"
-            onClick={this.searchReceta}
-          >
-            Buscar
-          </button>
-          : null }
+        
            { lista.length>0 ?
           <button
-            className="m-3 btn btn-sm btn-danger"
+            className="m-1 btn btn-sm btn-danger"
             onClick={this.borrarTodo}
           >
             Borrar Todo
@@ -303,9 +319,9 @@ toggleSearchable = () =>
          : null }
         </div>
         { recetas.length>0 ?  
-            <div className="col-md-12">
+            <div className="col-md-12 div-recetas">
               <br />
-              <p> Lista de Recetas: </p>
+              <h3> Lista de Recetas: </h3>
               <ul className="list-group">
                 {recetas &&
                   recetas.map((receta, index) => (
@@ -315,7 +331,7 @@ toggleSearchable = () =>
                       (index === currentIndex ? "active" : "")
                     }
                     onClick={() => this.redirectToTarget(receta, index)}
-                    
+                    style={{borderTopWidth: 'thin'}}
                     key={index}
                   >
                     {receta.nombre} - N° coincidencias {receta.coincidencias}

@@ -133,22 +133,110 @@ export default class Tutorial extends Component {
     return (
       <div className="col-md-12">
         {currentReceta ? (
-          <div className="col-md-12">
-            <h4>Receta</h4>
-           
-              <div className="form-group">
-               
-                
-                <h2>{currentReceta.nombre} </h2>
+            <div className="col-md-12">
+          
+              <div className="recImg"> 
+                <div id="top">  
+                  <h2>{currentReceta.nombre} </h2>
+                </div>
               </div>
-              <div className="form-group">
-                <label htmlFor="description">Preparación</label>
-                <div>{currentReceta.preparacion} </div>
-                  
-              </div>
+              <div className="divLeftRdetails">
+                <div className="form-group">
+                  <label htmlFor="description">Preparación</label>
+                  <div>{currentReceta.preparacion} </div>
 
-         
-           
+                  <div className="recTime cfx">
+                    <div className="recTimeTitle">
+                      <p className="timeTitle">Cooking Time</p>
+                    </div>
+                    <div className="AllTime">
+                      <div className="prepTime">
+                        <p className="pt">Preparation Time : 5</p>
+                      </div>
+                      
+                    </div>
+                  </div> 
+                </div>
+
+                <div className="recIng cfx">
+                  <div className="recIngTitle cfx">
+                      <div className="recIngLeft">
+                        <p className="ingTitle">Ingredients</p>
+                      </div>
+                   
+                  </div>
+                
+                  <ul className="recIngNos">
+                      <li className="ingNos">
+                        <p>
+                            <a className="prod_href" href="http://bigbasket.go2cloud.org/aff_c?offer_id=88&amp;aff_id=3085&amp;url=https%3A%2F%2Fwww.bigbasket.com%2Fpd%2F10000282%2Ffresho-pumpkin-disco-bhopla-disco-lal-1-kg%2F%3Ftransaction_id%3D{transaction_id}%26partner%3Dhasoffer%26utm_source%3Daffiliates%26utm_medium%3Dcps%26utm_campaign%3D{affiliate_name}" target="_blank">pumpkin 
+                            </a> 200 gms
+                        </p>
+                      </li>
+                      <li className="ingNos">
+                        <p>Onion,medium size 1 nos</p>
+                      </li>
+                      <li className="ingNos">
+                        <p>Tomato,medium size 1 nos</p>
+                      </li>
+                      <li className="ingNos">
+                        <p>Garlic Pods 5 nos</p>
+                      </li>
+                      <li className="ingNos">
+                        <p>Pink Salt 1 tsp</p>
+                      </li>
+                      <li className="ingNos">
+                        <p>Powdered Black Pepper 2 pinch</p>
+                      </li>
+                      <li className="ingNos">
+                        <p>Cream,to decorate (optional) 1 tsp</p>
+                      </li>
+                  </ul>
+                </div>
+                <div className="recDesc cfx">
+                <div className="recDescTitle">
+                    <p className="descTitle">Directions</p>
+                </div>
+                <ul className="recDescNos">
+                    <li className="descNos cfx">
+                      <div className="descNum">01</div>
+                      <div className="descStep">
+                          <p>Peel and cut pumpkin tomato onion and garlic</p>
+                      </div>
+                    </li>
+                    <li className="descNos cfx">
+                      <div className="descNum">02</div>
+                      <div className="descStep">
+                          <p>Place all in pressure cooker and cook till two whistles</p>
+                      </div>
+                    </li>
+                    <li className="descNos cfx">
+                      <div className="descNum">03</div>
+                      <div className="descStep">
+                          <p>After releasing pressure place all material in a plate</p>
+                      </div>
+                    </li>
+                    <li className="descNos cfx">
+                      <div className="descNum">04</div>
+                      <div className="descStep">
+                          <p>Cool down properly and blend it in puree</p>
+                      </div>
+                    </li>
+                    <li className="descNos cfx">
+                      <div className="descNum">05</div>
+                      <div className="descStep">
+                          <p>Cook this puree in a pan for two minutes and mix powdered black pepper</p>
+                      </div>
+                    </li>
+                    <li className="descNos cfx">
+                      <div className="descNum">06</div>
+                      <div className="descStep">
+                          <p>Garnish with cream (if you want to garnish) and serve hot</p>
+                      </div>
+                    </li>
+                </ul>
+</div>
+              </div>
           </div>
         ) : (
           <div>

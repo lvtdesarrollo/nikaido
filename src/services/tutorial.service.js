@@ -1,44 +1,23 @@
 import http from "../http-common";
+import axios from 'axios';
+import authHeader from './auth-header';
 
+const API_URL = process.env.REACT_APP_API_URL;
 class TutorialDataService {
-  getAll() {
-    return http.get("/tutorials");
-  }
+  
 
   getIngredientes() {
-    return http.get("/nikaido/ingredientes");
+    return axios.get(API_URL + 'ingredientes');
   }
 
   getReceta(id) {
-    return http.get(`/nikaido/receta/${id}`);
-  }
-
-  get(id) {
-    return http.get(`/tutorials/${id}`);
-  }
-
-  create(data) {
-    return http.post("/tutorials", data);
-  }
-
-  update(id, data) {
-    return http.put(`/tutorials/${id}`, data);
-  }
-
-  delete(id) {
-    return http.delete(`/tutorials/${id}`);
-  }
-
-  deleteAll() {
-    return http.delete(`/tutorials`);
-  }
-
-  findByTitle(title) {
-    return http.get(`/tutorials?title=${title}`);
+   // return http.get(`/nikaido/receta/${id}`);
+    return axios.get(API_URL + `receta/${id}`);
   }
 
   buscarRecetas(data) {
-    return http.post("/nikaido/recetas/buscar", data);
+    return axios.post(API_URL + "recetas/buscar", data);
+    
   }
 }
 
