@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import RecetaDataService from "../services/recetas.service";
 
-export default class AddTutorial extends Component {
+export default class AddReceta extends Component {
   constructor(props) {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
@@ -37,7 +37,7 @@ export default class AddTutorial extends Component {
       description: this.state.description
     };
 
-    TutorialDataService.create(data)
+    RecetaDataService.create(data)
       .then(response => {
         this.setState({
           id: response.data.id,

@@ -3,9 +3,9 @@ import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import AddTutorial from "./components/add-tutorial.component";
-import Tutorial from "./components/tutorial.component";
-import TutorialsList from "./components/tutorials-list.component";
+import AddReceta from "./components/add-receta.component";
+import Receta from "./components/receta.component";
+import ListaRecetas from "./components/recetas-list.component";
 import logo from './logo.png'; 
 
 //admin login
@@ -131,9 +131,9 @@ class App extends Component {
    
               <div className="">
               <Switch>
-                <Route exact path={["/", "/recetas"]} component={TutorialsList} />
-                <Route exact path="/add" component={AddTutorial} />
-                <Route path="/receta/:id" component={Tutorial} />
+                <Route exact path={["/", "/recetas"]} component={ListaRecetas} />
+                <Route exact path="/add" component={AddReceta} />
+                <Route path="/receta/:id" component={Receta} />
                 <Route exact path={["/", "/home"]} component={Home} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />

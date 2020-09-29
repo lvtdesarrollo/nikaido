@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import RecetaDataService from "../services/recetas.service";
 import { Link } from "react-router-dom";
 import Select from 'react-select';
 import { colourOptions } from '../docs/data';
 //import { Note } from '../docs/styled-components';
 
-export default class TutorialsList extends Component {
+export default class ListaRecetas extends Component {
   constructor(props) {
     super(props);
     this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
@@ -58,7 +58,7 @@ export default class TutorialsList extends Component {
   }
 
   retrieveTutorials() {
-    TutorialDataService.getAll()
+    RecetaDataService.getAll()
       .then(response => {
         this.setState({
           tutorials: response.data
@@ -72,7 +72,7 @@ export default class TutorialsList extends Component {
   }
 
   retrieveIngredientes() {
-    TutorialDataService.getIngredientes()
+    RecetaDataService.getIngredientes()
       .then(response => {
         this.setState({
           ingredientes: response.data
@@ -169,7 +169,7 @@ export default class TutorialsList extends Component {
   }
 
   searchTitle() {
-    TutorialDataService.findByTitle(this.state.searchTitle)
+    RecetaDataService.findByTitle(this.state.searchTitle)
       .then(response => {
         this.setState({
           tutorials: response.data
@@ -183,7 +183,7 @@ export default class TutorialsList extends Component {
 
   searchReceta() {
     if(this.state.lista.length>0){
-      TutorialDataService.buscarRecetas(this.state.lista)
+      RecetaDataService.buscarRecetas(this.state.lista)
       .then(response => {
         
         this.state.recetas = (response.data.length>0)?response.data:[];

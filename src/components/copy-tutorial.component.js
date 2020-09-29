@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import RecetaDataService from "../services/recetas.service";
 
-export default class Tutorial extends Component {
+export default class Receta extends Component {
   constructor(props) {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
@@ -51,7 +51,7 @@ export default class Tutorial extends Component {
   }
 
   getTutorial(id) {
-    TutorialDataService.get(id)
+    RecetaDataService.get(id)
       .then(response => {
         this.setState({
           currentReceta: response.data
@@ -65,7 +65,7 @@ export default class Tutorial extends Component {
 
   getReceta(id) {
     console.log(id)
-    TutorialDataService.getReceta(id)
+    RecetaDataService.getReceta(id)
       .then(response => {
         this.setState({
           currentReceta: response.data
@@ -85,7 +85,7 @@ export default class Tutorial extends Component {
       published: status
     };
 
-    TutorialDataService.update(this.state.currentReceta.id, data)
+    RecetaDataService.update(this.state.currentReceta.id, data)
       .then(response => {
         this.setState(prevState => ({
           currentReceta: {
@@ -101,7 +101,7 @@ export default class Tutorial extends Component {
   }
 
   updateTutorial() {
-    TutorialDataService.update(
+    RecetaDataService.update(
       this.state.currentReceta.id,
       this.state.currentReceta
     )
@@ -117,7 +117,7 @@ export default class Tutorial extends Component {
   }
 
   deleteTutorial() {    
-    TutorialDataService.delete(this.state.currentReceta.id)
+    RecetaDataService.delete(this.state.currentReceta.id)
       .then(response => {
         console.log(response.data);
         this.props.history.push('/tutorials')
