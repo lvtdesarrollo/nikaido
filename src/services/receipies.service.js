@@ -19,11 +19,6 @@ class RecetaDataService {
     return axios.post(API_URL + "recetas/buscar", data);
     
   }
-
-  getIngredientesReceta(id) {
-    // return http.get(`/nikaido/receta/${id}`);
-     return axios.get(API_URL + `recetaingredientes/${id}`);
-   }
 }
 
 export default new RecetaDataService();

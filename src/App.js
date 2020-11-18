@@ -6,7 +6,8 @@ import "./App.css";
 import AddReceta from "./components/add-receta.component";
 import Receta from "./components/receta.component";
 import ListaRecetas from "./components/recetas-list.component";
-import logo from './logo.png'; 
+import Receipies from "./components/receipies.component";
+//import salad from '../public/estilos/img/core-img/salad.png'; 
 
 //admin login
 import AuthService from "./services/auth.service";
@@ -51,87 +52,66 @@ class App extends Component {
     const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <a href="/recetas" className="navbar-brand">
-          <img src={logo} alt="Logo" />
-          </a>
-          <div className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to={"/recetas"} className="nav-link">
-                Buscar Recetas
-              </Link>
-            </li>
-          {/*
-            <li className="nav-item">
-              <Link to={"/add"} className="nav-link">
-                Add
-              </Link>
-            </li>
-          */}
-          <li className="nav-item">
-              <Link to={"/home"} className="nav-link">
-                Home
-              </Link>
-            </li>
-
-            {showModeratorBoard && (
-              <li className="nav-item">
-                <Link to={"/mod"} className="nav-link">
-                  Moderator Board
-                </Link>
-              </li>
-            )}
-
-            {showAdminBoard && (
-              <li className="nav-item">
-                <Link to={"/admin"} className="nav-link">
-                  Admin Board
-                </Link>
-              </li>
-            )}
-
-            {currentUser && (
-              <li className="nav-item">
-                <Link to={"/user"} className="nav-link">
-                  User
-                </Link>
-              </li>
-            )}
-          </div>
-
-          {currentUser ? (
-            <div className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link to={"/profile"} className="nav-link">
-                  {currentUser.username}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <a href="/login" className="nav-link" onClick={this.logOut}>
-                  LogOut
-                </a>
-              </li>
-            </div>
-          ) : (
-            <div className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link to={"/login"} className="nav-link">
-                  Login
-                </Link>
-              </li>
-
-              <li className="nav-item">
-                <Link to={"/register"} className="nav-link">
-                  Sign Up
-                </Link>
-              </li>
-            </div>
-          )}
-        </nav>
+           
    
-              <div className="">
+   
+    <div className="search-wrapper">
+      <div className="close-btn"><i className="fa fa-times" aria-hidden="true"></i></div>
+      <div className="container">
+          <div className="row">
+              <div className="col-12">
+                  <form action="#" method="post">
+                      <input type="search" name="search" placeholder="Type any keywords..."></input>
+                      <button type="submit"><i className="fa fa-search" aria-hidden="true"></i></button>
+                  </form>
+              </div>
+          </div>
+      </div>
+    </div>
+    <header className="header-area">
+
+     
+      <div className="top-header-area">
+          <div className="container h-100">
+              <div className="row h-100 align-items-center justify-content-between">
+
+           
+                 
+                  <div className="col-12 col-sm-5">
+                      <div className="breaking-news">
+                          <div id="breakingNewsTicker" className="ticker">
+                              <ul>
+                                  <li><a >Welcome to your favorite recipe app :)</a></li>
+                                
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+
+                  
+                  <div className="col-12 col-sm-6">
+                      <div className="top-social-info text-right">
+                       
+                          <a href="https://www.facebook.com/lgsoftwareweb" target="blank"><i className="fa fa-facebook" aria-hidden="true"></i></a>
+                          <a href="https://twitter.com/lgsoftwareweb" target="blank"><i className="fa fa-twitter" aria-hidden="true"></i></a>
+                          <a href="https://www.instagram.com/lgsoftware/" target="blank"><i className="fa fa-instagram" aria-hidden="true"></i></a>
+                          <a href="#" target="blank"><i className="fa fa-linkedin" aria-hidden="true"></i></a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+     
+     
+  </header>
+  
+  
+  <div className="">
               <Switch>
-                <Route exact path={["/", "/recetas"]} component={ListaRecetas} />
+                <Route exact path={["/", "/home"]} component={Home} />
+                <Route exact path={["/receipies", "/receipies"]} component={Receipies} />
+                <Route exact path={["/recetas", "/recetas"]} component={ListaRecetas} />
                 <Route exact path="/add" component={AddReceta} />
                 <Route path="/receta/:id" component={Receta} />
                 <Route exact path={["/", "/home"]} component={Home} />
@@ -143,9 +123,7 @@ class App extends Component {
                 <Route path="/admin" component={BoardAdmin} />
               </Switch>
             </div>
-          
-        
-      </div>
+  </div>
     );
   }
 }
